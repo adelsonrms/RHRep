@@ -1,0 +1,95 @@
+﻿@using ERP.Presentation.Api.Models
+
+<div class="collapse navbar-collapse azul_bg" id="Menu">
+    <ul class="nav navbar-nav azul_bg" style="color: white;font-weight: bold">
+        <!--Items do Menu-->
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Administrativo<span class="caret"></span></a>
+
+
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="~/Anexo/Index">Anexos</a>
+                </li>
+                <li>
+                    <a href="~/Funcionario/ListaDeFuncionarios">Funcionarios</a>
+                </li>
+                <li>
+                    <a href="#" class="btn disabled">Contratações</a>
+                </li>
+                <li>
+                    <a href="#" class="btn disabled">Atestados</a>
+                </li>
+                <li>
+                    <a href="#" class="btn disabled">Ferias</a>
+                </li>
+                <li>
+                    <a href="#" class="btn disabled">Exames Medicos</a>
+                </li>
+                <li>
+                    <a href="ui/Campanha.aspx" class="btn disabled">Ferias</a>
+                </li>
+                <li class="divider" />
+                <li>
+                    <a href="#" class="btn disabled">Documentos</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Financeiro <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#">Pagamentos</a>
+                </li>
+                <li>
+                    <a href="#">Receitas</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Comercial <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#">Clientes</a>
+                </li>
+                <li>
+                    <a href="#">Compras</a>
+                </li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Gestão de Projetos <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="#">Dashboard - Power BI</a>
+                </li>
+                <li>
+                    <a href="#">Projetos</a>
+                </li>
+                <li>
+                    <a href="#">Areas</a>
+                </li>
+                <li>
+                    <a href="http://timesheet.tecnun.com.br">TPA - Apontamentos</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <!--Login-->
+    <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <ul class="dropdown-menu">
+                <li>
+                    <a href="~/Home/FichaCadastral">Ficha Cadastral</a>
+                </li>
+                <li class="divider" />
+            </ul>
+        </li>
+        <li>
+            @{ Html.RenderPartial("~/Views/Account/_LoginPartial.cshtml");}
+            
+            @*<a href=@Url.Action("Logout", "Account")><span class="glyphicon glyphicon-log-in"></span>&nbsp;Sair</a>*@
+
+        </li>
+    </ul>
+</div>

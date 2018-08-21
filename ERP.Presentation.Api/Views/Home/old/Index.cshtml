@@ -1,0 +1,58 @@
+﻿@model IEnumerable<RH.UI.ViewModels.FuncionarioModel>
+
+@{
+    ViewBag.Title = "Funcionarios";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="display dataTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailPessoal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SexoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailPessoal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SexoID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusID)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new {id = item.FuncionarioID}) |
+                @Html.ActionLink("Detalhes", "FichaCadastral", new {id = item.FuncionarioID}) |
+                @Html.ActionLink("Excluir", "Delete", new {id = item.FuncionarioID})
+            </td>
+        </tr>
+    }
+
+</table>

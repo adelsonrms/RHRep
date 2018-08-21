@@ -1,0 +1,30 @@
+﻿@using ERP.RH.Application
+@using Microsoft.AspNet.Identity
+@using RH.Domain.Entities
+
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("Logout", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        //@Html.AntiForgeryToken()
+
+        Funcionario @funcionario = new FuncionarioApplication().ObtemFuncionario(User.Identity.GetUserName());
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = @funcionario.Id, modo = "read"})">
+                    <span class="glyphicon glyphicon-user"></span>&nbsp;@funcionario.NomeDoFuncionario.NomeCurto&nbsp;
+                    <span class="badge"> 4 </span><span class="caret"></span>
+                </a>
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Cadastrar", "Registrar", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Entrar", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

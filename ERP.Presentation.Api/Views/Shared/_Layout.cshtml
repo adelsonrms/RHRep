@@ -1,0 +1,119 @@
+﻿@using ERP.Presentation.Api.Models
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - ERP Tecnun</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+
+    @*Icones*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    @*@Scripts.Render("~/SELECT2")
+        @Styles.Render("~/SELECT2")*@
+
+    @*@Scripts.Render("~/JS/JQuery")
+        @Scripts.Render("~/JS/Bootstrap")
+        @Scripts.Render("~/JS/DataTable")
+
+        @Styles.Render("~/CSS/Tecnun")
+        @Styles.Render("~/CSS/Bootstrap")
+        @Styles.Render("~/CSS/DataTable")*@
+    <script src="~/Content/jquery/jquery-1.12.4.js"></script>
+
+    <script src="~/Content/jquery/jquery.maskedinput.js"></script>
+
+
+    <script src="~/Content/bootstrap/bootstrap.js"></script>
+    <link href="~/Content/bootstrap/bootstrap.css" rel="stylesheet" />
+
+    <script src="~/Content/jquery/jquery.dataTables.js"></script>
+    <script src="~/Content/datatable/js/dataTables.bootstrap.min.js"></script>
+    <link href="~/Content/datatable/css/jquery.dataTables.css" rel="stylesheet" />
+
+    <script src="~/Content/select2/select2.min.js"></script>
+    <link href="~/Content/select2/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/select2/select2-bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/tecnun.css" rel="stylesheet" />
+    <script src="~/Content/summernote/summernote.js" type="text/javascript"></script>
+    <link href="~/Content/summernote/summernote.css" rel="stylesheet" />
+
+    <script>
+        $(document).ready(function () {
+            $('.tpa_select2').select2();
+        });
+    </script>
+    <script type="text/javascript">
+        try {
+            var jq = $(document);
+            // document.write("JQuery instalado");
+        } catch (e) {
+            var mensagem = "JQuery não está instalado !";
+            document.write(mensagem);
+            //Interrompe no Depurador
+            throw new Error(mensagem);
+        }
+    </script>
+</head>
+<body>
+<header>
+    <!--Criando Header-->
+    <nav class="navbar navbar-inverse" id="barraMenu">
+        <div class="container">
+            <div class="navbar-header">
+                <!--Botão Toggle para responsividade-->
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#Menu">
+                    <span class="sr-only">Toggle</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="~/Home/Index">
+                    <img class="auto-style1 Brand" src="~/Images/96x96.png"/>
+                </a>
+            </div>
+            <!--Barra de Menu-->
+            @{ Html.RenderPartial("_MenuBar"); }
+        </div>
+    </nav>
+</header>
+
+
+<div id="CorpoDaPagina">
+    <div class="container">
+        
+        <div class="container-fluid">
+            <br />
+            <legend>@Html.MvcSiteMap().SiteMapPath()</legend>
+         </div>
+        <div class="row">
+                <div class="row sp-vertical"></div>
+                <div class="col-sm-12">
+                    @if (TempData["MensagemUsuario"] != null)
+                    {
+                        MensagemParaUsuario msg = TempData["MensagemUsuario"] as MensagemParaUsuario;
+                        if ((msg != null) && (!string.IsNullOrWhiteSpace(msg.Mensagem)))
+                        {
+                            <br />
+                            <div class="@msg.Classe" style="white-space: pre-line"><strong>@msg.Titulo</strong>: @msg.Mensagem</div>
+                        }
+                    }
+                </div>
+            </div>
+    </div>
+    @RenderBody()
+</div>
+    
+
+
+<footer>
+    <div class="container">
+        <div class="float-left">
+            <p>&copy; @DateTime.Now.Year - ERP Tecnun v1.00</p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

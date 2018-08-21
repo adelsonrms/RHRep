@@ -1,0 +1,23 @@
+﻿O padrão Repositório é abordado aqui para facilitar a concentrar as conexões com o banco de dados em que todas as entidades utilizarão.
+Aqui, estou adotando uma tecnica bem interessante que é de Repositório Generico.
+
+1 - Interface : IGenericRepository
+
+	Temos uma Interface para o repositorio.
+	Nessa interface é definido todos os metodos que cada entidade OBRIGATORIAMENTE terão que fazer. 
+	Por isso é criado a interface ou contrato.
+	Nesse caso são apenas as operações CRUD do banco de dados.
+		CREATE (CRIAR)
+		READ   (LER OU SELECIONAR)
+		UPDATE (ATUALIZAR)
+		DELETE (EXCLUIR)
+	Poderia ser outras funcionalidades. Nesse caso são apenas essas.
+
+	A interface não tem nenhuma ação, ela apenas define o que as classes que a implementam devem fazer.
+
+2 - Classe : GenericRepository
+	
+	Essa á uma classe Concreta (ou seja, terá o código) que implementa todo os metodos CRUD exigidos pela Interface.
+	A classe HERDA a interface IGenericRepository e IMPLEMENTA os metodos.
+	Essa classe tem a caracteristica de Generic, ou seja, ela encapsula o codigo que será representado por outra classe.
+	Assim, todas as entidades não precisarão conter o codigo repetidamente, apenas nessa classe

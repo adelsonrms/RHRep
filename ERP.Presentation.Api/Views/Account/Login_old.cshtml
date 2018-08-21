@@ -1,0 +1,97 @@
+﻿@model ERP.Presentation.Api.Models.LoginViewModel
+@{
+    ViewBag.Title = "Efetuar login";
+}
+
+
+<div class="row">
+
+    @*style="margin-top: 50px; margin-left: 60px"*@
+
+    <div id="loginbox" class="col-md-6 col-md-5 col-sm-8 col-sm-offset-2">
+
+
+        <div class="panel panel-info borda">
+            <div class="panel-heading" style="border-color: #17375e">
+                <div class="panel-title"><strong>Login TECNUN - Timesheet</strong></div>
+            </div>
+            <div style="padding-top:10px" class="panel-body">
+                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+
+                <section id="loginForm">
+
+                    <legend class="laranja">Informe usuário e senha.</legend>
+
+                    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                    {
+                        @*<div style="padding-top: 15px; font-size: 85%;">
+                                Efetuar login informando o e-mail/senha cadastrados no sistema da TECNUN.
+                            </div>*@
+
+
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", id="txtEmail" })
+                        </div>
+
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                        <div style="margin-bottom: 25px" class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                            @Html.PasswordFor(m => m.Password, new { @class = "form-control", id= "txtSenha" })
+                        </div>
+
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+                        <div class="input-group">
+                            <span class="input-group-addon">@Html.CheckBoxFor(m => m.RememberMe)</span>
+                            @Html.LabelFor(m => m.RememberMe, htmlAttributes: new { @class = "form-control" })
+                        </div>
+
+                        <div style="margin-top:10px" class="form-group">
+                            <div class="col-sm-6 controls">
+                                <input type="submit" value="Entrar" class="btn btn-primary" />
+                                @Html.ActionLink("Registrar", "Registrar", null, new { id = "lnkRegistrar", @class = "btn btn-primary btn-md" })
+                            </div>
+
+                            
+
+                        </div>
+
+                        @*<div class="form-group">
+                                <div class="col-md-12 control">
+                                    <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                                    </div>
+                                </div>
+                            </div>*@
+
+                        @**@
+                    }
+                </section>
+
+                <div class="form-group">
+                    <div class="col-md-12 control">
+                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%">
+                            Não tem acesso ? Contacte o administrador
+                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                Clicando aqui
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-pull-4"></div>
+</div>
+
+
+<script>
+    
+</script>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

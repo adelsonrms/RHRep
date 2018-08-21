@@ -1,0 +1,151 @@
+﻿@using ERP.Presentation.Api.Models
+@model AnexoViewModel
+
+@{
+    ViewBag.Title = "Upload";
+}
+
+@*Bibliotecas do Summernote*@
+
+
+<style>
+
+    .btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .input[type=file] {
+        position: relative;
+        width: auto
+    }
+</style>
+
+
+
+<div class="container">
+    <br />
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><strong>Enviar Arquivos</strong> <small>Envio de arquivos para anexos</small></div>
+        <div class="panel-body">
+
+            <!-- Standar Form -->
+            <h4>Selecione os arquivos a serem enviados (Maximo de 30 MB)</h4>
+
+            @using (Html.BeginForm("Upload", "Anexo", FormMethod.Post, new { enctype = "multipart/form-data", id = "js-upload-form" }))
+            {
+                <div class="container">
+
+                    <div class="row">
+
+
+                        @Html.HiddenFor(arq => arq.SalvarNoBd, new { id = "hChkDB" })
+                        @Html.HiddenFor(arq => arq.SalvarNoFileSystem, new { id = "hChkFS" })
+
+                        <div class="form-inline">
+                            <div class="form-group">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <input type="file" name="Arquivos" id="Arquivos" onchange="selecionarArquivos()" multiple>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="js-upload-finished" style="display: none">
+
+                                <h3>Arquivos Selecionads</h3>
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-01.jpg</a>
+                                    <a href="#" class="list-group-item list-group-item-success"><span class="badge alert-success pull-right">Success</span>image-02.jpg</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <br />
+                        <p>Informe uma observãção na caixa de edição abaixo</p>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                @Html.TextAreaFor(arq => arq.Notas, new { id = "txtObservacao" })
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row" style="display: none">
+                        <div class="form-inline">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="control-label" for="chkDB">Salvar no Banco de Dados : </div>
+                                    <button type="button" class="btn btn-sm btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off" onclick="selecionarCheck(this, 'hChkDB')">
+                                        <div class="handle"></div>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <div class="control-label" for="chkDB">Salvar no FileSystem : </div>
+                                    <button type="button" class="btn btn-sm btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off" onclick="selecionarCheck(this, 'hChkDB')">
+                                        <div class="handle"></div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <br />
+                            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Enviar</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    @*<button class="btn btn-default btn-lg"><i class="fa fa-circle-o-notch fa-spin"></i> Loading</button>
+        <button class="btn btn-success btn-xs"><i class="fa fa-refresh fa-spin"></i> Loading</button>*@
+</div>
+
+
+
+<script>
+
+    $("input[type=file]").on('change', function () {
+
+        var $arquivo = $('#Arquivos').files;
+
+
+        $arquivo.forEach(
+
+            this.append("<a href='#' class='list-group-item list-group-item-success'><span class='badge alert-success pull-right'>Success</span>image-01.jpg</a>")
+        );
+
+
+        //alert(this.files[0].name);
+    });
+
+    $('#txtObservacao').summernote({
+        height: 300,                 // set editor height
+        minHeight: null,             // set minimum height of editor
+        maxHeight: null,             // set maximum height of editor
+        focus: true                  // set focus to editable area after initializing summernote
+    });
+
+    function selecionarCheck(check, chkName) {
+        var valor = check.attributes["aria-pressed"].value;
+        valor = !(valor === 'true');
+        $('#' + chkName).prop('checked', valor);;
+        return false;
+    }
+
+</script>
+
+@if (ViewBag.Modo == "read")
+{
+    <script>
+        $("#Arquivos").attr("disabled", "disabled");
+        $("#txtObservacao").attr("disabled", "disabled");
+    </script>
+};

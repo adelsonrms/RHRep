@@ -1,0 +1,27 @@
+﻿@model ERP.Presentation.Api.Models.FuncionarioModel
+
+<div id="ResumoUsuario" class="container-fluid bordered">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img alt="..." class="media-object" src="~/Images/usuario.jpg"/>
+                    </a>
+                </div>
+                <div class="media-body cor_azul">
+                    <h4 id="NomeReduzido" class="media-heading">@Html.ValueFor(m => m.Model.Nome)</h4>
+                    <p id="cargo">
+                    </p>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 cor_azul">
+            <p>Matricula : @Html.ValueFor(m => m.Model.FuncionarioID)</p>
+            <p>Admissão : </p>
+            <p>Status : </p>
+            <p>Tempo de Casa :</p>
+        </div>
+    </div>
+</div>

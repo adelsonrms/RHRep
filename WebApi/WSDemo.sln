@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WSDemo", "WSDemo\WSDemo.csproj", "{EDD5C270-10EF-4AC4-87C2-8905A676EEB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ERP.RH.Infra", "\\mz-vv-fs-143\d9007_3\Projetos_TI\Desenvolvimento\Equipe\Adelson Marques\Estudos\Web\ProjetoERP\ERP.Infra.Data\ERP.RH.Infra.csproj", "{95FFD473-5E9D-4A91-BE76-8777A54C6D5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EDD5C270-10EF-4AC4-87C2-8905A676EEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDD5C270-10EF-4AC4-87C2-8905A676EEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDD5C270-10EF-4AC4-87C2-8905A676EEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDD5C270-10EF-4AC4-87C2-8905A676EEB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FFD473-5E9D-4A91-BE76-8777A54C6D5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FFD473-5E9D-4A91-BE76-8777A54C6D5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FFD473-5E9D-4A91-BE76-8777A54C6D5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FFD473-5E9D-4A91-BE76-8777A54C6D5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
