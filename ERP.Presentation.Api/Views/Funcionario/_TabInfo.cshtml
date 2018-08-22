@@ -3,160 +3,189 @@
 @model RH.Domain.Entities.Funcionario
 
 <div id="TabInfo" class="tab-pane active">
-
-    @using (Html.BeginForm("SalvarFuncionario", "Funcionario", FormMethod.Post))
-    {
-        @Html.CheckBoxFor(funcionario => funcionario.Ativo, new { @class = "form-control disabled", id = "hdAtivo", style="display:none"})
-        <div class="form-edit">
-            <legend>
-                <h5 class="laranja"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;Identificação</strong></h5>
-            </legend>
-
-            <div class="container-fluid" id="cnt_identificacao">
-                <div class="row" id="ident_NomeEmail">
-                    <div class="col-md-10">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Nome, new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Nome, new { @class = "form-control disabled", @placeholder = "Digite o nome" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label" for="txtID">Matricula</label>
-                            @Html.TextBoxFor(funcionario => funcionario.Id, new {id="txtID",  @class = "form-control disabled", @placeholder = "ID" })
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row" id="ident_Documentos">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.DataNascimento, "Data de Nascimento", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.DataNascimento, new { @class = "form-control" })
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label" for="cmbEstadoCivil">Estado Civil</label>
-                            @Html.DropDownListFor(f => f.EstadoCivil.Id, (IEnumerable<SelectListItem>)ViewData["cmbEstadoCivil"], new { id = "cmbEstadoCivil", @class = "form-control tpa_select2" });
-                        </div>
-                    </div>
-
-                    <div class="control-group col-md-3">
-                        <label class="control-label" for="sexo">Sexo</label>
-                        <div class="Controls">
-                            <label class="radio-inline">
-                                @Html.RadioButton("Sexo", "M", Model.SexoId == Enuns.eSexo.Masculino.Value())
-                                Masculino
-                            </label>
-                            <label class="radio-inline">
-                                @Html.RadioButton("Sexo", "F", Model.SexoId == Enuns.eSexo.Feminino.Value())
-                                Feminino
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <legend>
-                <h5 class="laranja"><strong><span class="glyphicon glyphicon-earphone"></span>&nbsp;Contatos</strong></h5>
-            </legend>
-            <div class="container-fluid" id="cnt_Telefones">
-                <div id="row_Emails" class="row" >
-                    @* ---- Emails ----*@
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.EmailProfissional, "Email Corporativo", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.EmailProfissional, new { @class = "form-control", @placeholder = "Informe o email corporativo do funcionario" })
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.EmailPessoal, "Email Pessoal", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.EmailPessoal, new { @class = "form-control", @placeholder = "Informe o email Pessoal do funcionario" })
-                        </div>
-                    </div>
-                </div>
-                <div id="row_Telefones" class="row">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Telefone, "Tel. Fixo", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Telefone, new { @class = "form-control", @placeholder = "Telefone fixo" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Celular, "Celular", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Celular, new { @class = "form-control", @placeholder = "Telefone celular" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label" for="Usuario">Tel. Comercial</label>
-                            <input class="form-control" type="email" name="Usuario" id="tel_comercial" placeholder="Telefone Comercial" data-validate="required" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label class="control-label" for="Usuario">Outros</label>
-                            <input class="form-control" type="email" name="Usuario" id="tel_outros" placeholder="Outro telefone" data-validate="required" />
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-            <legend id="Endereco">
-                <h5 class="laranja"><strong><span class="glyphicon glyphicon-globe"></span>&nbsp;Endereço</strong></h5>
-            </legend>
-            <div class="container-fluid" id="cnt_Endereco">
-                <div class="row" id="Endereco_Rua">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Endereco, "Logradouro (Rua/Av, Numero, Complemento, etc...)", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Endereco, new { @class = "form-control", @placeholder = "Rua/Av, Numero" })
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="Endereco_CEP">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.CEP, "CEP", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.CEP, new { @class = "form-control", @placeholder = "Informe o CEP" })
-                        </div>
-                    </div>
-
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Bairro, "Bairro", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Bairro, new { @class = "form-control", @placeholder = "Informe o nome do Bairro" })
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Cidade, "Cidade", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Cidade, new { @class = "form-control", @placeholder = "Informe a Cidade" })
-                        </div>
-                    </div>
-
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            @Html.LabelFor(funcionario => funcionario.Estado, "Estado", new { @class = "control-label" })
-                            @Html.TextBoxFor(funcionario => funcionario.Estado, new { @class = "form-control", @placeholder = "Informe o Estado" })
-                        </div>
-                    </div>
-
+    <br />
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <i class="fa fa-user-edit fa-fw"></i> Informações de Identificação do Funcionário
+            <div id="MenuOpcoes" class="pull-right">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-toolbox fa-fw"></i>Opções
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right" role="menu">
+                        <li>
+                            <a href="@Url.Action("FichaCadastral", "Funcionario", new {id=Model.Id, modo="edit"})">Editar</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">Imprimir</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
-        <br />
-        <button class="btn btn-primary" type="submit">Salvar</button>
-    }
+        <!-- /.panel-heading -->
+        <div class="panel-body">
+            @using (Html.BeginForm("SalvarFuncionario", "Funcionario", FormMethod.Post, new { id = "frmEdit" }))
+            {
+                @Html.CheckBoxFor(funcionario => funcionario.Ativo, new { @class = "form-control disabled", id = "hdAtivo", style = "display:none" })
+                <div class="form-edit">
+                    <legend>
+                        <h5 class="laranja"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;Identificação</strong></h5>
+                    </legend>
+                    <div class="container-fluid" id="cnt_identificacao">
+                        <div class="row" id="ident_NomeEmail">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Nome, new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Nome, new { @class = "form-control disabled", @placeholder = "Digite o nome" })
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label" for="txtID">Matricula</label>
+                                    @Html.TextBoxFor(funcionario => funcionario.Id, new { id = "txtID", @class = "form-control disabled", @placeholder = "ID" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="ident_Documentos">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.DataNascimento, "Data de Nascimento", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.DataNascimento, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="cmbEstadoCivil">Estado Civil</label>
+                                    @Html.DropDownListFor(f => f.EstadoCivil.Id, (IEnumerable<SelectListItem>)ViewData["cmbEstadoCivil"], new { id = "cmbEstadoCivil", @class = "form-control tpa_select2" });
+                                </div>
+                            </div>
+                            <div class="control-group col-md-3">
+                                <label class="control-label" for="sexo">Sexo</label>
+                                <div class="Controls">
+                                    <label class="radio-inline">
+                                        @Html.RadioButton("Sexo", "M", Model.SexoId == Enuns.eSexo.Masculino.Value())
+                                        Masculino
+                                    </label>
+                                    <label class="radio-inline">
+                                        @Html.RadioButton("Sexo", "F", Model.SexoId == Enuns.eSexo.Feminino.Value())
+                                        Feminino
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <legend>
+                        <h5 class="laranja"><strong><span class="glyphicon glyphicon-earphone"></span>&nbsp;Contatos</strong></h5>
+                    </legend>
+                    <div class="container-fluid" id="cnt_Telefones">
+                        <div id="row_Emails" class="row">
+                            @* ---- Emails ----*@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.EmailProfissional, "Email Corporativo", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.EmailProfissional, new { @class = "form-control", @placeholder = "Informe o email corporativo do funcionario" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.EmailPessoal, "Email Pessoal", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.EmailPessoal, new { @class = "form-control", @placeholder = "Informe o email Pessoal do funcionario" })
+                                </div>
+                            </div>
+                        </div>
+                        <div id="row_Telefones" class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Telefone, "Tel. Fixo", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Telefone, new { @class = "form-control", @placeholder = "Telefone fixo" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Celular, "Celular", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Celular, new { @class = "form-control", @placeholder = "Telefone celular" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="Usuario">Tel. Comercial</label>
+                                    <input class="form-control" type="email" name="Usuario" id="tel_comercial" placeholder="Telefone Comercial" data-validate="required" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label" for="Usuario">Outros</label>
+                                    <input class="form-control" type="email" name="Usuario" id="tel_outros" placeholder="Outro telefone" data-validate="required" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <legend id="Endereco">
+                        <h5 class="laranja"><strong><span class="glyphicon glyphicon-globe"></span>&nbsp;Endereço</strong></h5>
+                    </legend>
+                    <div class="container-fluid" id="cnt_Endereco">
+                        <div class="row" id="Endereco_Rua">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Endereco, "Logradouro (Rua/Av, Numero, Complemento, etc...)", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Endereco, new { @class = "form-control", @placeholder = "Rua/Av, Numero" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="Endereco_CEP">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.CEP, "CEP", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.CEP, new { @class = "form-control", @placeholder = "Informe o CEP" })
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Bairro, "Bairro", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Bairro, new { @class = "form-control", @placeholder = "Informe o nome do Bairro" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Cidade, "Cidade", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Cidade, new { @class = "form-control", @placeholder = "Informe a Cidade" })
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    @Html.LabelFor(funcionario => funcionario.Estado, "Estado", new { @class = "control-label" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Estado, new { @class = "form-control", @placeholder = "Informe o Estado" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                
+            }
+        </div>
+        <!-- /.panel-body -->
+        <div class="panel-footer">
+            @*<button class="btn btn-primary" onclick="frmEdit.submit()"><span class="glyphicon glyphicon-floppy-disk"></span>Salvar</button>*@
+            <button type="button" class="btn btn-primary btn-lg btnSalvar" id="btnSalvar" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Aguarde...">&nbsp;Salvar</button>
+
+        </div>
+    </div>
 </div>
+
+<script type="text/javascript">
+    $('.btnSalvar').on('click', 
+        function() {
+            var $this = $(this);
+            $this.button('loading');
+            frmEdit.Submit();
+        }
+    );
+</script>
+

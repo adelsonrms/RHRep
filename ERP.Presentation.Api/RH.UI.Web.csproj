@@ -207,6 +207,7 @@
     <Content Include="Content\datatable\js\jquery.dataTables.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\google\google_icon.css" />
+    <Content Include="Content\Images\favicon.png" />
     <Content Include="Content\Images\funcionarios\adelson%40tecnun.com.br.jpg" />
     <Content Include="Content\Images\funcionarios\cibele%40tecnun.com.br.jpg" />
     <Content Include="Content\Images\funcionarios\cristina%40tecnun.com.br.jpg" />
@@ -362,6 +363,7 @@
     <Content Include="Images\BolaVerde.png" />
     <Content Include="Images\BolaVermelha.png" />
     <Content Include="Content\Images\funcionarios\usuario.jpg" />
+    <Content Include="Images\logo.png" />
     <Content Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

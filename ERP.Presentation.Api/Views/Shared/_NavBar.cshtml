@@ -15,7 +15,7 @@
         {
             funcionario = new FuncionarioApplication().ObtemFuncionario(User.Identity.GetUserName());
             NomeLogin = funcionario.NomeDoFuncionario.NomeCurto;
-            ID = funcionario.NomeDoFuncionario.NomeCurto;
+            ID = funcionario.Id.ToString();
         }
     }
     catch (Exception e)
