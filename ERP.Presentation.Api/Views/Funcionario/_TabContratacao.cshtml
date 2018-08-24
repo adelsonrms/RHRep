@@ -16,24 +16,42 @@
 }
 <div id="TabContratacao" class="tab-pane">
 
+<div class="container-fluid" style="padding-top: 8px">
+@*@if (ViewBag.Modo == "edit")
+{
+    <div id="botoes" class="row" style="padding: 6px; border: blueviolet;border: thin">
+        <button class="btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar</button>
+    </div>
+}*@
+<div class="row">
+<div class="panel panel-default">
+<div class="panel-heading">
+    <i class="fa fa-file-signature fa-fw"></i> Relação dos Contratos de Trabalho
+    <div id="MenuOpcoes" class="pull-right">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-toolbox fa-fw"></i>Opções
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu">
+                <li>
+                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = Model.Id, modo = "edit"})">Novo Contrato</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="panel-body">
 
 
 
     @using (Html.BeginForm("SalvarFuncionario", "Funcionario", FormMethod.Post))
     {
-        <br />
-
-        <button type="button" class="btn btn-primary"><i class="fa fa-address-book fa-fw"></i>Novo Contrato</button>
-        <br />
+       
         <legend>
             <h5 class="cor_titulos"><strong><i class="fa fa-file-signature fa-fw"></i>&nbsp;Contratos Ativos</strong></h5>
         </legend>
-
         <div class="form-edit">
-
-
-
-
             <div class="container-fluid" id="cnt_DocumentosRG">
                 @foreach (Contrato contrato in @ContratosAtivos)
                 {
@@ -117,15 +135,15 @@
                             </div>
                         </div>
                         @*<div class="panel-footer">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-lg-4 pull-left">
-                                            <button type="button" class="btn btn-danger">&nbsp;Encerrar</button>
-                                            <button type="button" class="btn btn-success">&nbsp;Prorrogar</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>*@
+                                                <div class="container-fluid">
+                                                    <div class="row">
+                                                        <div class="col-lg-4 pull-left">
+                                                            <button type="button" class="btn btn-danger">&nbsp;Encerrar</button>
+                                                            <button type="button" class="btn btn-success">&nbsp;Prorrogar</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>*@
                     </div>
                 }
             </div>
@@ -216,28 +234,20 @@
                                         </div>
                                     </div>
                                 </div>
-                                @*<div class="panel-footer">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-lg-4 pull-left">
-                                                    <button type="button" class="btn btn-danger">&nbsp;Encerrar</button>
-                                                    <button type="button" class="btn btn-success">&nbsp;Prorrogar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>*@
                             </div>
                         }
                     </div>
-
                 }
             }
         </div>
-
-
-        <br />
-        <button class="btn btn-primary" type="submit">Salvar</button>
     }
+</div>
+
+</div>
+
+</div>
+
+</div>
 </div>
 
 <script>

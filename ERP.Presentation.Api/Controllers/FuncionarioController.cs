@@ -89,7 +89,7 @@ namespace ERP.Presentation.Api.Controllers
         {
             _app.SalvaFuncionario(model);
             MensagemParaUsuario.MensagemSucesso("Dados atualizados com sucesso.", TempData);
-            var parametros = new {id= model.Id, editar = false};
+            var parametros = new {id= model.Id, modo = "read"};
             return RedirectToAction("FichaCadastral", parametros);
 
         }

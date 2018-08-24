@@ -104,6 +104,15 @@
     <script src="~/Content/datatable/js/dataTables.bootstrap.min.js"></script>
     <script src="~/Content/select2/select2.min.js"></script>
     
+    <script type="text/javascript">
+        $('.botaoSubmit').on('click',
+            function() {
+                var $this = $(this);
+                $this.button('loading');
+                $('#frmEdit').submit();
+            }
+        );
+    </script>
 
 <footer>
     <div class="container">
