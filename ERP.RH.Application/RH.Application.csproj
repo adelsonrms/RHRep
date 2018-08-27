@@ -55,6 +55,10 @@
       <Project>{8e9f5397-43ec-457c-b78e-410d60492689}</Project>
       <Name>RH.Services</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RH.ViewModel\RH.ViewModel.csproj">
+      <Project>{3bb71721-3ef0-40a0-81fd-668fe79325a3}</Project>
+      <Name>RH.ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">

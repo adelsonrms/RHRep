@@ -9,7 +9,21 @@
     <fieldset id="Campos_Form">
         @{Html.RenderPartial("_Resumo");}
         <legend><h3 class="azul"><strong></strong></h3></legend>
-        <br />
+        @{
+            var visivel = "none";
+
+            if (ViewBag.Modo == "edit")
+            {
+                visivel = "inline";
+            }
+
+        }
+        
+        <div class="row botoes" style="padding: 6px; border: blueviolet; border: thin; display:@visivel">
+            <button class="btn btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar Alterações</button>
+            <button onclick="HabilitarModoEdicao(false)" class="btn btn-danger"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Cancelar</button>
+        </div>
+
         <div id="Linha_Botoes_Tab" class="row">
             <div class="col-xs-12">
                 <strong>
@@ -40,10 +54,32 @@
         </div> <!--Conteudo-->
     </fieldset>
 </div>
+
+<script>
+    function HabilitarModoEdicao(sim) {
+        if (sim === true) {
+            $('.form-control').removeAttr('disabled');
+            $('.botoes').show();
+            $('.btnCancelar').show();
+            $('.btnEditar').hide();
+            
+
+        } else {
+            $('.form-control').attr('disabled', 'disabled');
+            $('.botoes').hide();
+            $('.btnCancelar').hide();
+            $('.btnEditar').show();
+        }
+        return false;
+    }
+    
+</script>
+
 @if (@editar == false && ViewBag.Modo == "read")
 {
     <script>
-        $('.form-control').attr('disabled', 'disabled');
+        $('.btnCancelar').show();
+        $('.btnEditar').hide();
     </script>
 };
 

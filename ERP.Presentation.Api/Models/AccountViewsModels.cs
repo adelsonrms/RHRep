@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using RH.ViewModel;
 
 namespace ERP.Presentation.Api.Models
 {

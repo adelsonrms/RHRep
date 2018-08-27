@@ -4,16 +4,14 @@
             xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
 
   <mvcSiteMapNode title="Inicio" controller="Home" action="Index">
-
     <mvcSiteMapNode title="Lista de Funcionarios" controller="Funcionario" action="ListaDeFuncionarios">
       <mvcSiteMapNode title="Ficha Cadastral" controller="Funcionario" action="FichaCadastral" id="0" modo="read"/>
     </mvcSiteMapNode>
-
     <mvcSiteMapNode title="Anexos" controller="Anexo" action="Index">
       <mvcSiteMapNode title="Upload" controller="Anexo" action="Upload" id="0"/>
     </mvcSiteMapNode>
-    
-    
+    <mvcSiteMapNode title="Login" controller="Account" action="Login">
+      <mvcSiteMapNode title="Registrar" controller="Account" action="Registrar"/>
+    </mvcSiteMapNode>
   </mvcSiteMapNode>
-
 </mvcSiteMap>

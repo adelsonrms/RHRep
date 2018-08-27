@@ -6,12 +6,6 @@
 
 <div id="TabDoc" class="tab-pane">
     <div class="container-fluid" style="padding-top: 8px">
-        @if (ViewBag.Modo == "edit")
-        {
-            <div id="botoes" class="row" style="padding: 6px; border: blueviolet;border: thin">
-                <button class="btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar</button>
-            </div>
-        }
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -24,8 +18,12 @@
                             </button>
                             <ul class="dropdown-menu pull-right" role="menu">
                                 <li>
-                                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = Model.Id, modo = "edit"})">Editar</a>
+                                    <a class="btn-link btnEditar" href="#" onclick="HabilitarModoEdicao(true)">&nbsp;Editar</a>
                                 </li>
+                                <li>
+                                    <a class="btn-link btnCancelar" href="#" onclick="HabilitarModoEdicao(false)" style="display: none">&nbsp;Cancelar</a>
+                                </li>
+                                <li class="divider"></li>
                             </ul>
                         </div>
                     </div>

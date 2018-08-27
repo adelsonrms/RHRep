@@ -7,6 +7,7 @@ using RH.Infra.Data.DBContexts;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ERP.Presentation.Api.Identity.Services;
 
 namespace ERP.Presentation.Api.App_Start
 {
@@ -55,7 +56,7 @@ namespace ERP.Presentation.Api.App_Start
                 BodyFormat = "Your security code is {0}"
             });
             manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
+            manager.SmsService = new SMSService();
 
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
@@ -90,23 +91,7 @@ namespace ERP.Presentation.Api.App_Start
         }
     }
 
-    public class EmailService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Classe de Servico do Email
-            return Task.FromResult(0);
-        }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Classe de Servico do SMS
-            return Task.FromResult(0);
-        }
-    }
+  
 
 
 }

@@ -19,6 +19,9 @@ namespace RH.Domain.Entities
     public class Funcionario : EFEntity
     {
         #region propriedades públicas
+        //public new virtual int Id { get; set; }
+        //public new virtual string Nome { get; set; }
+
         public virtual string Matricula { get; set; }
         public virtual string CPF { get; set; }
         public virtual string PIS { get; set; }

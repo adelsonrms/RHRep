@@ -138,12 +138,23 @@ namespace RH.UI.Controllers
 
                 if (ModelState.IsValid)
                 {
+                    //Define um novo usuário
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                    
+                    //Cria a entrada do usuário no banco de dados
                     var result = await UserManager.CreateAsync(user, model.Senha);
+
+                    //Caso o usuário tenha sido criado com sucesso, efetua o Login
                     if (result.Succeeded)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-                        return RedirectToAction("Index", "Home");
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        var callbackUrl = await GerarEmailDeConfirmacao(user);
+
+                        ViewBag.Link = callbackUrl;
+
+                        return View("DisplayEmail");
+                        //return RedirectToAction("Index", "Home");
                     }
                     AddErrors(result);
                 }
@@ -157,6 +168,43 @@ namespace RH.UI.Controllers
                 throw;
             }
 
+        }
+
+        private async Task<string> GerarEmailDeConfirmacao(ApplicationUser user)
+        {
+            try
+            {
+                //Gera o codigo criptografado que será usado para validar o email
+                var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+
+                //Gera a URL de callback que será enviado ao email do usuário para confirmação
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+
+                //Invoca o envio do email para a classe de serviço pre-configurada
+                await UserManager.SendEmailAsync(user.Id,
+                    "Confirme sua Conta",
+                    "Clique no link a seguir para confirmar o cadastro :\n <br /><br /><a class='btn btn-default' href='" + callbackUrl + "'>Confirmar</a>"
+                );
+
+                //Retorna a url que foi enviada.
+                return callbackUrl;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return View("Error");
+            }
+            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
         private void AddErrors(IdentityResult result)

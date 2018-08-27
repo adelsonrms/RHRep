@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using ERP.Presentation.Api.Models;
 using ERP.RH.Application;
 using RH.Domain.Entities;
 using System.Web.Mvc;
+using RH.DomainViewModelAutoMapper;
 using RH.Services;
+using RH.ViewModel;
 
 namespace ERP.Presentation.Api.Controllers
 {
@@ -18,7 +21,10 @@ namespace ERP.Presentation.Api.Controllers
         public ActionResult ListaDeFuncionarios()
         {
             //Recupera a lista de funcionarios
-            var lista = _app.ObtemListaDeFuncionarios();
+            var funcionarios = _app.ObtemListaDeFuncionarios();
+
+            var lista = AutoMapperConfig.AutoMapper.Map<IEnumerable<Funcionario>, IEnumerable<FuncionarioViewModel>>(funcionarios);
+
 
             //Devolve o resultado para View
             return View(lista);

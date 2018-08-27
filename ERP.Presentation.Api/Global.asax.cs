@@ -3,6 +3,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using RH.DomainViewModelAutoMapper;
 
 namespace ERP.Presentation.Api
 {
@@ -19,6 +20,10 @@ namespace ERP.Presentation.Api
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Registra o auto mapeamento das classes de dominio e as respectivas view models 
+            AutoMapperConfig.RegisterAutoMappings();
+
         }
     }
 }

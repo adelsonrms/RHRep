@@ -4,6 +4,7 @@ using RH.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RH.ViewModel;
 
 namespace ERP.RH.Application
 {
