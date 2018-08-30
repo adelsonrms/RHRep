@@ -41,7 +41,10 @@ namespace ERP.RH.Application
             {
                 var repContrato = InicializaRepositorio<Contrato>();
                 //Obtem os contrados do Banco de dados
-                contrato = repContrato.ObterTodos().SingleOrDefault(u => u.IdFuncionario == funcionario.Id);
+                var contratos = repContrato.ObterTodos();
+
+                contrato = contratos.FirstOrDefault(u => u.IdFuncionario == funcionario.Id);
+
                 contrato.Cargo = InicializaRepositorio<Cargo>().ObterPorId(contrato.IdCargo);
                 contrato.Modalidade = InicializaRepositorio<Modalidade>().ObterPorId(contrato.IdModalidade);
                 contrato.TempoDeCasa = CalculaTempoDeCasa(contrato);

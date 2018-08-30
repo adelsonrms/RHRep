@@ -1,125 +1,133 @@
 ﻿@using ERP.RH.Application
 @using RH.Domain.Entities
-@using ERP.Presentation.Api.Models
-@using RH.ViewModel
+@model IEnumerable<RH.ViewModel.FuncionarioViewModel>
 
-@model IEnumerable<FuncionarioViewModel>
+@*@model IEnumerable<Funcionario>*@
+
 @{
-    var @app = new FuncionarioApplication();
-    Funcionario @funcionario;
-    ViewBag.Title = "Funcionarios";
-}
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Funcionarios</h1>
+        var @app = new FuncionarioApplication();
+        Funcionario @funcionario;
+        ViewBag.Title = "Funcionarios";
+    }
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Funcionarios</h1>
+        </div>
+        <!-- /.col-lg-12 -->
     </div>
-    <!-- /.col-lg-12 -->
-</div>
-<div class="row">
-    <p>
-        <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = 0, modo = "create"})" class="btn btn-success btn-sm azul_bg" style="font-size: 16px">
-            <i class="material-icons" style="font-size: 16px">person_add</i>&nbsp;Novo Funcionario
-        </a>
-    </p>
-    <br />
-    
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <i class="fa fa-users fa-fw"></i> Relação de Funcionarios contratados
-            <div id="MenuOpcoes" class="pull-right">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                        <i class="fa fa-filter fa-fw"></i>Exibir
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu pull-right" role="menu">
-                        <li>
-                            <a href="#">Somente Ativos</a>
-                        </li>
-                        <li>
-                            <a href="#">Desligados</a>
-                        </li>
-                        <li>
-                            <a href="#">Ausencias</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#">Todos</a>
-                        </li>
-                    </ul>
+    <div class="row">
+        <p>
+            <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = 0, modo = "create"})" class="btn btn-success btn-sm azul_bg" style="font-size: 16px">
+                <i class="material-icons" style="font-size: 16px">person_add</i>&nbsp;Novo Funcionario
+            </a>
+        </p>
+        <br />
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <i class="fa fa-users fa-fw"></i> Relação de Funcionarios contratados
+                <div id="MenuOpcoes" class="pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-filter fa-fw"></i>Exibir
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right" role="menu">
+                            <li>
+                                <a href="#">Somente Ativos</a>
+                            </li>
+                            <li>
+                                <a href="#">Desligados</a>
+                            </li>
+                            <li>
+                                <a href="#">Ausencias</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Todos</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!-- /.panel-heading -->
-        <div class="panel-body">
-            <div class="table-responsive">
-                <table class="table table-hover" id="tbFuncionarios">
-                    <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Email</th>
-                        <th>Situação</th>
-                        <th>Status</th>
-                        <th>Manutenção</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach (var func in Model)
-                    {
-                        {
-                            funcionario = app.ObtemFuncionario(func.Id);
-                        }
-                        <tr>
-                            <td>
-                                &nbsp;@funcionario.Nome
-                            </td>
-                            <td>
-                                <a href="mailto:@funcionario.EmailProfissional">@funcionario.EmailProfissional</a>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="tbFuncionarios">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Situação</th>
+                                <th>Status</th>
+                                <th>Manutenção</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var func in Model)
+                            {
+                                {
 
-                            </td>
-                            <td>
-                                @funcionario.Contrato.StatusContrato
-                            </td>
-                            <td>
-                                <div class="col-sm-5">
-                                    @if (@funcionario.Ativo)
+                                    using ( ContratoApplication cApp = new ContratoApplication())
                                     {
-                                        <button type="button" class="btn btn-lg btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off" disabled="disabled">
-                                            <div class="handle"></div>
-                                        </button>
+                                        //funcionario = (Funcionario)func;
+                                        funcionario = app.ObtemFuncionario(func.Id);
                                     }
-                                    else
-                                    {
-                                        <button type="button" class="btn btn-lg btn-toggle" data-toggle="button" aria-pressed="true" autocomplete="off" disabled="disabled">
-                                            <div class="handle"></div>
-                                        </button>
-                                    }
-                                </div>
-                            </td>
-                            <td>
-                                <div class="row" style="padding: 10px">
-                                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = funcionario.Id, modo = "edit"})" class="btn btn-warning btn-sm laranja_bg"><span class="glyphicon glyphicon-edit"></span>&nbsp;Editar</a>
 
-                                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = funcionario.Id, modo = "read"})" class="btn btn-success btn-sm azul_bg">
-                                        @*<span class="glyphicon glyphicon-new-window"></span>*@
-                                        <i style="font-size: 18px" class="fa">&#xf2bc;</i>
-                                        &nbsp;Ficha
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                    </tbody>
-                </table>
-                <!-- /.table-responsive -->
+
+                                    using ( ContratoApplication cApp = new ContratoApplication())
+                                    {
+                                        funcionario.Contrato = cApp.RecuperaContratoPorFuncionario(funcionario);
+                                    }
+                                }
+                                <tr>
+                                    <td>
+                                        &nbsp;@funcionario.Nome
+                                    </td>
+                                    <td>
+                                        <a href="mailto:@funcionario.EmailProfissional">@funcionario.EmailProfissional</a>
+                                    </td>
+                                    <td>
+                                        @func.Contrato.
+
+                                    </td>
+                                    <td>
+                                        <div class="col-sm-5">
+                                            @if (@funcionario.Ativo)
+                                            {
+                                                <button type="button" class="btn btn-lg btn-toggle active" data-toggle="button" aria-pressed="true" autocomplete="off" disabled="disabled">
+                                                    <div class="handle"></div>
+                                                </button>
+                                            }
+                                            else
+                                            {
+                                                <button type="button" class="btn btn-lg btn-toggle" data-toggle="button" aria-pressed="true" autocomplete="off" disabled="disabled">
+                                                    <div class="handle"></div>
+                                                </button>
+                                            }
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row" style="padding: 10px">
+                                            <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = funcionario.Id, modo = "edit"})" class="btn btn-warning btn-sm laranja_bg"><span class="glyphicon glyphicon-edit"></span>&nbsp;Editar</a>
+                                            <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = funcionario.Id, modo = "read"})" class="btn btn-success btn-sm azul_bg">
+                                                @*<span class="glyphicon glyphicon-new-window"></span>*@
+                                                <i style="font-size: 18px" class="fa">&#xf2bc;</i>
+                                                &nbsp;Ficha
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <!-- /.table-responsive -->
+                </div>
             </div>
+            <!-- /.panel-body -->
         </div>
-        <!-- /.panel-body -->
+        <!-- /.panel -->
     </div>
-    <!-- /.panel -->
-</div>
-<script type="text/javascript">
+    <script type="text/javascript">
     $('#tbFuncionarios').DataTable({ "language": { "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json" } });
-</script>
-
+    </script>

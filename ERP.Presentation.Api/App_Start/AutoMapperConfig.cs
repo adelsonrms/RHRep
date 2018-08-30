@@ -2,7 +2,7 @@
 using RH.Domain.Entities;
 using RH.ViewModel;
 
-namespace RH.DomainViewModelAutoMapper
+namespace ERP.Presentation.Api
 {
     public static class AutoMapperConfig
     {
@@ -18,11 +18,10 @@ namespace RH.DomainViewModelAutoMapper
             }
         }
 
-        public static IMapper AutoMapper {get { return Mapper.Instance; }}
+        //public static IMapper AutoMapper {get { return Mapper.Instance; }}
 
         public static void RegisterAutoMappings()
         {
-
             //Aplica o mapeamento baseado em uma classe de perfil.
             //Caso não haja a necessidade de mapear campos especificos, esse metodo ja é suficiente
             Mapper.Initialize(mp => mp.AddProfile<MappingProfile>());

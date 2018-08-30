@@ -1,6 +1,7 @@
 ﻿#region "Namepaces do Sistema"
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using ERP.RH.Domain;
 using ERP.Shared.ValueObjects;
 
@@ -18,10 +19,14 @@ namespace RH.Domain.Entities
     /// </summary>
     public class Funcionario : EFEntity
     {
-        #region propriedades públicas
-        //public new virtual int Id { get; set; }
-        //public new virtual string Nome { get; set; }
+        public Funcionario()
+        {
+            Contrato = new Contrato();
+            Documento  = new Documento();
+            EstadoCivil = new EstadoCivil();
+        }
 
+        #region propriedades públicas
         public virtual string Matricula { get; set; }
         public virtual string CPF { get; set; }
         public virtual string PIS { get; set; }

@@ -183,6 +183,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Identity\Services\EmailService.cs" />
     <Compile Include="Identity\Services\SMSService.cs" />
+    <Compile Include="App_Start\AutoMapperConfig.cs" />
     <Compile Include="Models\DashboardViewModel.cs" />
     <Compile Include="Models\RegistrarContaViewModel.cs" />
     <Compile Include="Global.asax.cs">
@@ -558,10 +559,6 @@
     <ProjectReference Include="..\ERP.Shared\RH.Comum.csproj">
       <Project>{771911b4-ba03-44a5-bef4-8bf6a04c0954}</Project>
       <Name>RH.Comum</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RH.DomainViewModelAutoMapper\RH.DomainViewModelAutoMapper.csproj">
-      <Project>{bee0c0d9-4fca-436f-9c35-0a8f8ee9e1bd}</Project>
-      <Name>RH.DomainViewModelAutoMapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\RH.Services\RH.Services.csproj">
       <Project>{8E9F5397-43EC-457C-B78E-410D60492689}</Project>
