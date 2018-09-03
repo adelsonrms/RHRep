@@ -12,6 +12,8 @@ namespace ERP.RH.Application
     {
         private IGenericRepository<Contrato> _rep; //Repositório
         private readonly DateService _dtService = new DateService();
+        Funcionario _funcionario = null;
+
 
         public ContratoApplication()
         {
@@ -34,22 +36,42 @@ namespace ERP.RH.Application
             return lista;
         }
 
-        public Contrato RecuperaContratoPorFuncionario(Funcionario funcionario)
+        public Contrato RecuperaContratoPorFuncionario(int FuncionarioId)
         {
             Contrato contrato = new Contrato();
+
+            _funcionario = InicializaRepositorio<Funcionario>().ObterPorId(FuncionarioId);
+
             try
             {
                 var repContrato = InicializaRepositorio<Contrato>();
                 //Obtem os contrados do Banco de dados
                 var contratos = repContrato.ObterTodos();
 
-                contrato = contratos.FirstOrDefault(u => u.IdFuncionario == funcionario.Id);
+                contrato = contratos.FirstOrDefault(u => u.IdFuncionario == _funcionario.Id);
 
                 contrato.Cargo = InicializaRepositorio<Cargo>().ObterPorId(contrato.IdCargo);
                 contrato.Modalidade = InicializaRepositorio<Modalidade>().ObterPorId(contrato.IdModalidade);
                 contrato.TempoDeCasa = CalculaTempoDeCasa(contrato);
 
                 return contrato;
+            }
+            catch (Exception e)
+            {
+                //Caso haja falha, retorna um contrato vazio
+                return contrato;
+                throw;
+            }
+        }
+
+        public Contrato RecuperaContratoPorFuncionario(Funcionario funcionario)
+        {
+
+            Contrato contrato = new Contrato();
+
+            try
+            {
+                return RecuperaContratoPorFuncionario(funcionario.Id);
             }
             catch (Exception e)
             {
@@ -102,14 +124,18 @@ namespace ERP.RH.Application
             }
         }
 
-        public IEnumerable<Contrato> ContratosAtivos(Funcionario funcionario)
+        public IEnumerable<Contrato> ContratosAtivos(int funcionarioId)
         {
-            return RecuperaContratosPorFuncionario(funcionario, Enuns.eSituacao.Ativo);
+            _funcionario = InicializaRepositorio<Funcionario>().ObterPorId(funcionarioId);
+
+            return RecuperaContratosPorFuncionario(_funcionario, Enuns.eSituacao.Ativo);
         }
 
-        public IEnumerable<Contrato> ContratosInativos(Funcionario funcionario)
+        public IEnumerable<Contrato> ContratosInativos(int funcionarioId)
         {
-                return RecuperaContratosPorFuncionario(funcionario, Enuns.eSituacao.Inativo);
+            _funcionario = InicializaRepositorio<Funcionario>().ObterPorId(funcionarioId);
+
+            return RecuperaContratosPorFuncionario(_funcionario, Enuns.eSituacao.Inativo);
         }
 
         public string CalculaTempoDeCasa(Contrato contrato)

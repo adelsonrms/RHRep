@@ -1,9 +1,11 @@
-﻿@model RH.Domain.Entities.Funcionario
+﻿@using ERP.RH.Application
+@using MvcSiteMapProvider.Reflection
+@using RH.Domain.Entities
+@model RH.ViewModel.FuncionarioViewModel
 
 @{
-    string @editar = ViewBag.Editar==true?"":"disabled";
+    string @editar = ViewBag.Editar == true ? "" : "disabled";
 }
-
 
 <div id="ResumoUsuario" class="container-fluid">
     <div class="row">
@@ -17,14 +19,14 @@
 
                             if (File.Exists(absolutePath))
                             {
-                                <img alt="..." class="media-object" src="~/Content/Images/funcionarios/@{@Html.ValueFor(functionario => functionario.EmailProfissional)}.jpg"/>
+                                <img alt="..." class="media-object" src="~/Content/Images/funcionarios/@{@Html.ValueFor(functionario => functionario.EmailProfissional)}.jpg" />
                             }
                             else
                             {
                                 <img alt="..." class="media-object" src="~/Content/Images/funcionarios/generico.jpg" />
                             }
                         }
-                        
+
                     </a>
                 </div>
                 <div class="media-body azul">
@@ -47,9 +49,7 @@
                         <div class="row" style="text-align: right; padding:5px">Ativo&nbsp;:&nbsp;</div>
                     </div>
                 </strong>
-
                 <div class="col-xs-6">
-
                     <div class="row" style="text-align: left; padding:5px">
                         @Html.ValueFor(funcionario => funcionario.Id)
                     </div>
@@ -81,7 +81,6 @@
         </div>
     </div>
 </div>
-
 <script type="text/javascript">
     function selecionar(check) {
         var valor = check.attributes["aria-pressed"].value;

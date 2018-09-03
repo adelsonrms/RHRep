@@ -1,9 +1,8 @@
-﻿@model RH.Domain.Entities.Funcionario
+﻿@model RH.ViewModel.FuncionarioViewModel
 
 @{
- var @doc = Model.Documento;
+    var @doc = Model.Documento;
 }
-
 <div id="TabDoc" class="tab-pane">
     <div class="container-fluid" style="padding-top: 8px">
         <div class="row">
@@ -35,13 +34,11 @@
                             <legend>
                                 <h5 class="cor_titulos"><strong><i class="fa fa-signature fa-fw"></i>&nbsp;Identificação Pessoal</strong></h5>
                             </legend>
-
                             <div class="container-fluid" id="cnt_DocumentosRG">
                                 <div class="row" id="docRG">
                                     <div class="form-group col-md-3">
                                         <label class="control-label" for="RG_Num">RG</label>
                                         @Html.TextBoxFor(funcionario => @doc.RG_Numero, new { @class = "form-control", id = "RG_Num" })
-
                                     </div>
                                     <div class="form-group  col-md-3">
                                         <label class="control-label" for="RG_DtEmissao">Data de Emissão</label>
@@ -51,37 +48,30 @@
                                         <label class="control-label " for="RG_OrgaoEmissor">Orgão Emissor</label>
                                         @Html.TextBoxFor(funcionario => @doc.RG_OrgaoEmissor, new { @class = "form-control", id = "RG_OrgaoEmissor" })
                                     </div>
-                    
+
                                     <div class="form-group  col-md-3">
                                         <label class="control-label " for="RG_UF">Orgão Emissor</label>
                                         @Html.TextBoxFor(funcionario => @doc.RG_UF, new { @class = "form-control", id = "RG_UF" })
                                     </div>
-
                                 </div>
-
                                 <div class="row" id="docCPF">
                                     <div class="form-group col-md-3">
                                         <label class="control-label" for="CPF_Num">CPF</label>
                                         @Html.TextBoxFor(funcionario => @doc.CPF, new { @class = "form-control", id = "CPF_Num" })
                                     </div>
-
                                     <div class="form-group col-md-3">
                                         <label class="control-label" for="CNH_Num">CNH</label>
                                         @Html.TextBoxFor(funcionario => @doc.CartHabilitacao_Numero, new { @class = "form-control", id = "CNH_Num" })
                                     </div>
-
                                     <div class="form-group col-md-3">
                                         <label class="control-label" for="CNH_Categ">Categoria</label>
                                         @Html.TextBoxFor(funcionario => @doc.CartHabilitacao_Categoria, new { @class = "form-control", id = "CNH_Categ" })
                                     </div>
-
                                 </div>
-
                                 <div class="row" id="Div1">
                                     <div class="form-group  col-md-6">
                                         <label class="control-label" for="Filiacao_NomeDaMae">Nome da Mãe</label>
                                         @Html.TextBoxFor(funcionario => @doc.NomeDaMae, new { @class = "form-control", id = "Filiacao_NomeDaMae" })
-
                                     </div>
                                     <div class="form-group  col-md-6">
                                         <label class="control-label" for="Filiacao_NomeDoPai">Nome do Pai</label>
@@ -90,11 +80,9 @@
                                 </div>
                             </div>
 
-
                             <legend>
                                 <h5 class="cor_titulos"><strong><i class="fa fa-signature fa-fw"></i>&nbsp;Carteira de Trabalho/Previdencia Social</strong></h5>
                             </legend>
-
                             <div class="container-fluid" id="cnt_DocumentosCT">
                                 <div class="row" id="docCT">
                                     <div class="form-group col-md-4">
@@ -105,19 +93,15 @@
                                         <label class="control-label" for="CT_Serie">Serie</label>
                                         @Html.TextBoxFor(funcionario => @doc.CartTrabalho_Serie, new { @class = "form-control", id = "CT_Serie" })
                                     </div>
-
                                     <div class="form-group  col-md-2">
                                         <label class="control-label" for="CT_DtEmissao">Data de Emissão</label>
                                         <input id="CT_DtEmissao" class="form-control" name="CT_DtEmissao" placeholder="Data de emissão da CT" type="text" />
                                     </div>
-
                                     <div class="form-group  col-md-3">
                                         <label class="control-label" for="CT_Estado">Estado</label>
                                         <input id="CT_Estado" class="form-control" name="CT_Estado" placeholder="UF de emissão da CT" type="text" />
                                     </div>
-
                                 </div>
-
                                 <div class="row" id="Div2">
                                     <div class="form-group col-md-4">
                                         <label class="control-label" for="PIS_Num">NIT/PIS/PASEP</label>

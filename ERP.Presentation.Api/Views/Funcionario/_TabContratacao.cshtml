@@ -3,138 +3,133 @@
 @using RH.Domain.Entities
 @using RH.Shared
 @using RH.Shared.Extensions
-@model RH.Domain.Entities.Funcionario 
+@model RH.ViewModel.FuncionarioViewModel
 
 @{
     ContratoApplication contratoApp = new ContratoApplication();
 
 
-    var @ContratosAtivos = contratoApp.ContratosAtivos(Model);
-    var @ContratosInativos = contratoApp.ContratosInativos(Model);
+    var @contratosAtivos = contratoApp.ContratosAtivos(Model.Id);
+    var @contratosInativos = contratoApp.ContratosInativos(Model.Id);
 
 
 }
 <div id="TabContratacao" class="tab-pane">
-
-<div class="container-fluid" style="padding-top: 8px">
-@*@if (ViewBag.Modo == "edit")
-{
-    <div id="botoes" class="row" style="padding: 6px; border: blueviolet;border: thin">
-        <button class="btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar</button>
-    </div>
-}*@
-<div class="row">
-<div class="panel panel-default">
-<div class="panel-heading">
-    <i class="fa fa-file-signature fa-fw"></i> Relação dos Contratos de Trabalho
-    <div id="MenuOpcoes" class="pull-right">
-        <div class="btn-group">
-            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-toolbox fa-fw"></i>Opções
-                <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu pull-right" role="menu">
-                <li>
-                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = Model.Id, modo = "edit"})">Novo Contrato</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
-<div class="panel-body">
-
-
-
-    @using (Html.BeginForm("SalvarFuncionario", "Funcionario", FormMethod.Post))
-    {
-       
-        <legend>
-            <h5 class="cor_titulos"><strong><i class="fa fa-file-signature fa-fw"></i>&nbsp;Contratos Ativos</strong></h5>
-        </legend>
-        <div class="form-edit">
-            <div class="container-fluid" id="cnt_DocumentosRG">
-                @foreach (Contrato contrato in @ContratosAtivos)
-                {
-                    <div class="panel panel-green">
-                        <div class="panel-heading">
-                            <i class="fa fa-file-signature fa-fw"></i>
-                            #@contrato.Id > Contrato de Trabalho - @contrato.Modalidade.NomeModalidade | Status : @contrato.StatusContrato | Vigencia : @contrato.TempoDeCasa
-                            <div id="MenuOpcoes" class="pull-right">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        <i class="fa fa-filter fa-fw"></i>Ações
-                                        <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li>
-                                            <a href="#"><i class="fa fa-edit fa-fw"></i>Editar</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="#">Encerra</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Prorrogar</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Excluir</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+    <div class="container-fluid" style="padding-top: 8px">
+        @*@if (ViewBag.Modo == "edit")
+            {
+                <div id="botoes" class="row" style="padding: 6px; border: blueviolet;border: thin">
+                    <button class="btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar</button>
+                </div>
+            }*@
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <i class="fa fa-file-signature fa-fw"></i> Relação dos Contratos de Trabalho
+                    <div id="MenuOpcoes" class="pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-toolbox fa-fw"></i>Opções
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu pull-right" role="menu">
+                                <li>
+                                    <a href="@Url.Action("FichaCadastral", "Funcionario", new {id = Model.Id, modo = "edit"})">Novo Contrato</a>
+                                </li>
+                            </ul>
                         </div>
-                        <div class="panel-body">
-                            <div class="row" id="rowAdmissao">
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label " for="txtDtInicio">Dt. Inicio</label>
-                                        <input type="Text" class="form-control" name="txtDtInicio" value="@contrato.DataAdmissao" disabled />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label " for="DtTermino">Dt. Término</label>
-                                        <input type="Text" class="form-control" name="DtTermino" value="@contrato.DataDemissao" disabled />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="cmbModalidade">Modalidade</label>
-                                        <input type="Text" class="form-control" name="cmbModalidade" value="@contrato.Modalidade.NomeModalidade" disabled />
+                    </div>
+                </div>
+                <div class="panel-body">
 
-                                        @*@Html.DropDownListFor(f => f.Contrato.Modalidade.Id, (IEnumerable<SelectListItem>)ViewData["cmbModalidade"], new { id = "cmbModalidade", @class = "form-control" });*@
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="cmbCargos">Cargo</label>
-                                        <input type="Text" class="form-control" name="cmbCargos" value="@contrato.Cargo.Nome" disabled />
+                    @using (Html.BeginForm("SalvarFuncionario", "Funcionario", FormMethod.Post))
+                    {
 
-                                        @*@Html.DropDownListFor(f => f.Contrato.Cargo.Id, (IEnumerable<SelectListItem>)ViewData["cmbCargos"], new { id = "cmbCargos", @class = "form-control" });*@
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label" for="txtCBO">Cargo</label>
-                                        <input type="Text" class="form-control" name="txtCBO" value="@contrato.Cargo.CBO" disabled />
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label class="control-label " for="txtSalario">Salário Base</label>
-                                        <input type="Text" class="form-control" name="txtSalario" value="@contrato.Salario" disabled />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        @Html.TextArea("txtNotas", "Informações adicionais sobre o contrato", new { id = "txtObservacao", style = "width:100%", @class = "editor_notas" })
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @*<div class="panel-footer">
+                        <legend>
+                            <h5 class="cor_titulos"><strong><i class="fa fa-file-signature fa-fw"></i>&nbsp;Contratos Ativos</strong></h5>
+                        </legend>
+                        <div class="form-edit">
+                            <div class="container-fluid" id="cnt_DocumentosRG">
+                                @foreach (Contrato contrato in contratosAtivos)
+                                {
+                                    <div class="panel panel-green">
+                                        <div class="panel-heading">
+                                            <i class="fa fa-file-signature fa-fw"></i>
+                                            #@contrato.Id > Contrato de Trabalho - @contrato.Modalidade.NomeModalidade | Status : @contrato.StatusContrato | Vigencia : @contrato.TempoDeCasa
+                                            <div id="MenuOpcoes" class="pull-right">
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                                        <i class="fa fa-filter fa-fw"></i>Ações
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu pull-right" role="menu">
+                                                        <li>
+                                                            <a href="#"><i class="fa fa-edit fa-fw"></i>Editar</a>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <a href="#">Encerra</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Prorrogar</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="#">Excluir</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row" id="rowAdmissao">
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label " for="txtDtInicio">Dt. Inicio</label>
+                                                        <input type="Text" class="form-control" name="txtDtInicio" value="@contrato.DataAdmissao" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label " for="DtTermino">Dt. Término</label>
+                                                        <input type="Text" class="form-control" name="DtTermino" value="@contrato.DataDemissao" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="cmbModalidade">Modalidade</label>
+                                                        <input type="Text" class="form-control" name="cmbModalidade" value="@contrato.Modalidade.NomeModalidade" disabled />
+                                                        @*@Html.DropDownListFor(f => f.Contrato.Modalidade.Id, (IEnumerable<SelectListItem>)ViewData["cmbModalidade"], new { id = "cmbModalidade", @class = "form-control" });*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="cmbCargos">Cargo</label>
+                                                        <input type="Text" class="form-control" name="cmbCargos" value="@contrato.Cargo.Nome" disabled />
+                                                        @*@Html.DropDownListFor(f => f.Contrato.Cargo.Id, (IEnumerable<SelectListItem>)ViewData["cmbCargos"], new { id = "cmbCargos", @class = "form-control" });*@
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label" for="txtCBO">Cargo</label>
+                                                        <input type="Text" class="form-control" name="txtCBO" value="@contrato.Cargo.CBO" disabled />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label " for="txtSalario">Salário Base</label>
+                                                        <input type="Text" class="form-control" name="txtSalario" value="@contrato.Salario" disabled />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        @Html.TextArea("txtNotas", "Informações adicionais sobre o contrato", new { id = "txtObservacao", style = "width:100%", @class = "editor_notas" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @*<div class="panel-footer">
                                                 <div class="container-fluid">
                                                     <div class="row">
                                                         <div class="col-lg-4 pull-left">
@@ -144,112 +139,104 @@
                                                     </div>
                                                 </div>
                                             </div>*@
-                    </div>
-                }
-            </div>
-
-            @{
-
-                if (ContratosInativos.Any())
-                {
-                    <legend>
-                        <h5 class="cor_titulos"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;Contratos Inativos</strong></h5>
-                    </legend>
-
-                    <div class="container-fluid" id="cnt_DocumentosRG">
-                        @foreach (Contrato contrato in @ContratosInativos)
-                        {
-                            <div class="panel panel-danger">
-                                <div class="panel-heading">
-                                    <i class="fa fa-file-signature fa-fw"></i>
-                                    #@contrato.Id.ToString() > Contrato de Trabalho - @contrato.Modalidade.NomeModalidade | Status : @contrato.StatusContrato | Vigencia : @contrato.TempoDeCasa
-                                    <div id="MenuOpcoes" class="pull-right" style="display: none">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                                <i class="fa fa-filter fa-fw"></i>Ações
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu pull-right" role="menu">
-                                                <li>
-                                                    <a href="#">Encerra</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Prorrogar</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#">Excluir</a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
-                                </div>
-                                <div class="panel-body">
-                                    <div class="row" id="rowAdmissao">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label " for="txtDtInicio">Dt. Inicio</label>
-                                                <input type="Text" class="form-control" name="txtDtInicio" value="@contrato.DataAdmissao" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label " for="DtTermino">Dt. Término</label>
-                                                <input type="Text" class="form-control" name="DtTermino" value="@contrato.DataDemissao" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label" for="cmbModalidade">Modalidade</label>
-                                                <input type="Text" class="form-control" name="cmbModalidade" value="@contrato.Modalidade.NomeModalidade" disabled />
-
-                                                @*@Html.DropDownListFor(f => f.Contrato.Modalidade.Id, (IEnumerable<SelectListItem>)ViewData["cmbModalidade"], new { id = "cmbModalidade", @class = "form-control" });*@
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label" for="cmbCargos">Cargo</label>
-                                                <input type="Text" class="form-control" name="cmbCargos" value="@contrato.Cargo.Nome" disabled />
-
-                                                @*@Html.DropDownListFor(f => f.Contrato.Cargo.Id, (IEnumerable<SelectListItem>)ViewData["cmbCargos"], new { id = "cmbCargos", @class = "form-control" });*@
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label" for="txtCBO">Cargo</label>
-                                                <input type="Text" class="form-control" name="txtCBO" value="@contrato.Cargo.CBO" disabled />
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <label class="control-label " for="txtSalario">Salário Base</label>
-                                                <input type="Text" class="form-control" name="txtSalario" value="@contrato.Salario" disabled />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                @Html.TextArea("txtNotas", "Informações adicionais sobre o contrato", new { id = "txtObservacao", style = "width:100%", @class = "editor_notas" })
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                }
                             </div>
-                        }
-                    </div>
-                }
-            }
+                            @{
+
+                                if (contratosInativos.Any())
+                                {
+                                    <legend>
+                                        <h5 class="cor_titulos"><strong><span class="glyphicon glyphicon-user"></span>&nbsp;Contratos Inativos</strong></h5>
+                                    </legend>
+                                    <div class="container-fluid" id="cnt_DocumentosRG">
+                                        @foreach (Contrato contrato in @contratosInativos)
+                                        {
+                                            <div class="panel panel-danger">
+                                                <div class="panel-heading">
+                                                    <i class="fa fa-file-signature fa-fw"></i>
+                                                    #@contrato.Id.ToString() > Contrato de Trabalho - @contrato.Modalidade.NomeModalidade | Status : @contrato.StatusContrato | Vigencia : @contrato.TempoDeCasa
+                                                    <div id="MenuOpcoes" class="pull-right" style="display: none">
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                                                <i class="fa fa-filter fa-fw"></i>Ações
+                                                                <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu pull-right" role="menu">
+                                                                <li>
+                                                                    <a href="#">Encerra</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">Prorrogar</a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="#">Excluir</a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div class="row" id="rowAdmissao">
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label " for="txtDtInicio">Dt. Inicio</label>
+                                                                <input type="Text" class="form-control" name="txtDtInicio" value="@contrato.DataAdmissao" disabled />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label " for="DtTermino">Dt. Término</label>
+                                                                <input type="Text" class="form-control" name="DtTermino" value="@contrato.DataDemissao" disabled />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="cmbModalidade">Modalidade</label>
+                                                                <input type="Text" class="form-control" name="cmbModalidade" value="@contrato.Modalidade.NomeModalidade" disabled />
+                                                                @*@Html.DropDownListFor(f => f.Contrato.Modalidade.Id, (IEnumerable<SelectListItem>)ViewData["cmbModalidade"], new { id = "cmbModalidade", @class = "form-control" });*@
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="cmbCargos">Cargo</label>
+                                                                <input type="Text" class="form-control" name="cmbCargos" value="@contrato.Cargo.Nome" disabled />
+                                                                @*@Html.DropDownListFor(f => f.Contrato.Cargo.Id, (IEnumerable<SelectListItem>)ViewData["cmbCargos"], new { id = "cmbCargos", @class = "form-control" });*@
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label" for="txtCBO">Cargo</label>
+                                                                <input type="Text" class="form-control" name="txtCBO" value="@contrato.Cargo.CBO" disabled />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-group">
+                                                                <label class="control-label " for="txtSalario">Salário Base</label>
+                                                                <input type="Text" class="form-control" name="txtSalario" value="@contrato.Salario" disabled />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="form-group">
+                                                                @Html.TextArea("txtNotas", "Informações adicionais sobre o contrato", new { id = "txtObservacao", style = "width:100%", @class = "editor_notas" })
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
         </div>
-    }
+    </div>
 </div>
-
-</div>
-
-</div>
-
-</div>
-</div>
-
 <script>
     $('.editor_notas').summernote({
         height: 80,                 // set editor height
@@ -257,5 +244,5 @@
         maxHeight: null,             // set maximum height of editor
         focus: true                  // set focus to editable area after initializing summernote
     });
-    
+
 </script>

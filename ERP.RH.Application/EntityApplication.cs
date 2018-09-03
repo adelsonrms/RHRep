@@ -16,7 +16,6 @@ namespace ERP.RH.Application
         {
             Rep = InicializaRepositorio<T>();
         }
-
         public IEnumerable<T> ObterTodos()
         {
             IEnumerable<T> lista;
@@ -30,7 +29,6 @@ namespace ERP.RH.Application
             }
             return lista;
         }
-
         public void Salvar(T entidade)
         {
             try

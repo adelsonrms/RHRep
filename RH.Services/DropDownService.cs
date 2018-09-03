@@ -5,7 +5,7 @@ namespace RH.Services
 {
    public class DropDownService
     {
-        public SelectList HtmlCombo(dynamic fonte, string campoValor, string campoTexto)
+        public SelectList GerarComboSelect(dynamic fonte, string campoValor, string campoTexto)
         {
             try
             {

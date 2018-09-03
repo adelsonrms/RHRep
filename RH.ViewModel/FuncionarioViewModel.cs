@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using ERP.Shared.ValueObjects;
+using RH.Domain.Entities;
 
 namespace RH.ViewModel
 {
@@ -22,16 +23,18 @@ namespace RH.ViewModel
 
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:###.###.###-##}")]
         public  string CPF { get; set; }
+
+        [DisplayName("Numero do PIS/PASEP")]
         public  string PIS { get; set; }
 
         [Phone]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^(\([0-9]{2}\))\s([0-9]{4})-([0-9]{4,5})$", ErrorMessage = "Telefone Inválido")]
+        [RegularExpression(@"^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$", ErrorMessage = "O Numero do Telefone é Inválido")]
         public  string Telefone { get; set; }
 
         [Phone]
         [DataType(DataType.PhoneNumber)]
-        [RegularExpression(@"^(\([0-9]{2}\))\s([0-9]{4})-([0-9]{4,5})$", ErrorMessage = "Telefone Inválido")]
+        [RegularExpression(@"^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$", ErrorMessage = "O Numero do Celular é Inválido")]
         public  string Celular { get; set; }
 
         [DisplayName("Email/Login")]
@@ -52,15 +55,18 @@ namespace RH.ViewModel
         public  string Estado { get; set; }
 
         [Display(Name = "Data de Nascimento")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        public string DataNascimento { get; set; }
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
+        public DateTime DataNascimento { get; set; }
+
+
         [Display(Name = "Sexo")]
         public  int SexoId { get; set; }
         public string Idade { get; set; }
         public  bool Ativo { get; set; }
-        public  ContratoViewModel Contrato { get; set; }
-        public  DocumentoViewModel Documento { get; set; }
-        public  EstadoCivilViewModel EstadoCivil { get; set; }
+        public Contrato Contrato { get; set; }
+        public Documento Documento { get; set; }
+        public EstadoCivil EstadoCivil { get; set; }
         public Nome NomeDoFuncionario { get => new Nome(this.Nome); }
     }
 

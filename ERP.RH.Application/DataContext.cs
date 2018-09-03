@@ -15,7 +15,6 @@ namespace ERP.RH.Application
         {
             get { return this._db; }
         }
-
         /// <summary>
         /// Inicializa um repositório generico
         /// </summary>
@@ -36,7 +35,7 @@ namespace ERP.RH.Application
 
         public void Dispose()
         {
-            //_db.Dispose();
+            _db.Dispose();
         }
     }
 }

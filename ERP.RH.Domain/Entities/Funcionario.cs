@@ -1,5 +1,6 @@
 ﻿#region "Namepaces do Sistema"
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using ERP.RH.Domain;
@@ -39,7 +40,7 @@ namespace RH.Domain.Entities
         public virtual string Bairro { get; set; }
         public virtual string Cidade { get; set; }
         public virtual string Estado { get; set; }
-        public virtual string DataNascimento { get; set; }
+        public virtual DateTime DataNascimento { get; set; }
         public virtual int SexoId { get; set; }
         public string Idade { get; set; }
         public virtual bool Ativo { get; set; }
@@ -47,6 +48,9 @@ namespace RH.Domain.Entities
         public virtual Documento Documento { get; set; }
         public virtual EstadoCivil EstadoCivil { get; set; }
         public Nome NomeDoFuncionario { get => new Nome(this.Nome); }
+
+        
+
         #endregion
     }
 

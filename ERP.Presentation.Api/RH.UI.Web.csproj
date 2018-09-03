@@ -214,6 +214,14 @@
     <Content Include="Content\datatable\css\jquery.dataTables.css" />
     <Content Include="Content\datatable\js\dataTables.bootstrap.min.js" />
     <Content Include="Content\datatable\js\jquery.dataTables.js" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\css\all.css" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\css\all.min.css" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\css\fontawesome.css" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\css\fontawesome.min.css" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\js\all.js" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\js\all.min.js" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\js\fontawesome.js" />
+    <Content Include="Content\fonts\font-awesome\v531\cdn\js\fontawesome.min.js" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\fonts\google\google_icon.css" />
     <Content Include="Content\Images\favicon.png" />

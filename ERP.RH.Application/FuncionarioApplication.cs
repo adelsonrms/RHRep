@@ -75,7 +75,7 @@ namespace ERP.RH.Application
 
             if (funcionario.DataNascimento != null)
             {
-                idade = new DateService().TempoDecorrido(DateTime.Parse(funcionario.DataNascimento), DateTime.Today, "y");
+                idade = new DateService().TempoDecorrido(funcionario.DataNascimento, DateTime.Today, "y");
             }
             return idade;
         }

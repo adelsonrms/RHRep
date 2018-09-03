@@ -37,6 +37,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ERP.RH.Domain\RH.Domain.csproj">
+      <Project>{CE1444D5-D02F-4E61-A3AE-96C0BA0B4F93}</Project>
+      <Name>RH.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ERP.Shared\RH.Comum.csproj">
       <Project>{771911b4-ba03-44a5-bef4-8bf6a04c0954}</Project>
       <Name>RH.Comum</Name>

@@ -14,25 +14,39 @@ namespace ERP.Presentation.Api.Controllers
     [Authorize]
     public class FuncionarioController : Controller
     {
+        private FuncionarioApplication _app;
+
+        public FuncionarioController()
+        {
+            _app = new FuncionarioApplication();
+        }
         //
         // GET: /Funcionario/
-        private readonly FuncionarioApplication  _app = new FuncionarioApplication();
         
-
+        /// <summary>
+        /// Retorna a lista de funcionarios
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ListaDeFuncionarios()
         {
             //Recupera a lista de funcionarios
-            var funcionarios = _app.ObtemListaDeFuncionarios();
+            using (this._app)
+            {
+                var funcionarios = _app.ObtemListaDeFuncionarios();
 
-            var lista = Mapper.Map<IEnumerable<Funcionario>, IEnumerable<FuncionarioViewModel>>(funcionarios);
-            //var lista = funcionarios;
+                var lista = Mapper.Map<IEnumerable<Funcionario>, IEnumerable<FuncionarioViewModel>>(funcionarios);
+                //var lista = funcionarios;
 
-
-            //Devolve o resultado para View
-            return View(lista);
+                //Devolve o resultado para View
+                return View(lista);
+            }
         }
-
-
+        /// <summary>
+        /// Acessa a pagina de detalhes do funcionario selecionado
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="modo"></param>
+        /// <returns></returns>
         public ActionResult FichaCadastral(int id, string modo)
         {
             //ViewBag.ComboPerfil = 
@@ -41,61 +55,54 @@ namespace ERP.Presentation.Api.Controllers
 
             using (EntityApplication<Cargo> app = new EntityApplication<Cargo>())
             {
-                ViewData["cmbCargos"] = new DropDownService().HtmlCombo(app.ObterTodos(), "Id", "Nome");
+                ViewData["cmbCargos"] = new DropDownService().GerarComboSelect(fonte:app.ObterTodos(),campoValor: "Id", campoTexto: "Nome");
             }
 
             using (EntityApplication<Modalidade> app = new EntityApplication<Modalidade>())
             {
-                ViewData["cmbModalidade"] = new DropDownService().HtmlCombo(app.ObterTodos(), "Id", "NomeModalidade");
+                ViewData["cmbModalidade"] = new DropDownService().GerarComboSelect(app.ObterTodos(), "Id", "NomeModalidade");
             }
 
             using (EntityApplication<EstadoCivil> app = new EntityApplication<EstadoCivil>())
             {
-                ViewData["cmbEstadoCivil"] = new DropDownService().HtmlCombo(app.ObterTodos(), "Id", "Nome");
+                ViewData["cmbEstadoCivil"] = new DropDownService().GerarComboSelect(app.ObterTodos(), "Id", "Nome");
             }
-
 
             ViewBag.TituloDaPagina = "Ficha Cadastral";
             ViewBag.Editar = editar;
             ViewBag.Modo = modo;
-            Funcionario funcionario;
+
+            FuncionarioViewModel funcionario;
 
             if (modo=="edit" || modo=="read")
             {
-                funcionario = _app.ObtemFuncionario(id);
+                funcionario = Mapper.Map<Funcionario, FuncionarioViewModel>(_app.ObtemFuncionario(id));  
             }
             else
             {
-                funcionario = new Funcionario();
+                funcionario = new FuncionarioViewModel();
             }
-            
+
+            using (ContratoApplication cApp = new ContratoApplication())
+            {
+                funcionario.Contrato = cApp.RecuperaContratoPorFuncionario(funcionario.Id);
+            }
+
+
             return View(funcionario);
         }
-
-        private void PopulaCombos()
-        {
-            try
-            {
-                
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Erro ao popular as Combos", e);
-            }
-        }
-
-
+        
+        /// <summary>
+        /// Salva informações do funcionatio
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult FichaCadastral(Funcionario model)
+        public ActionResult SalvarFuncionario(FuncionarioViewModel model)
         {
-            _app.SalvaFuncionario(model);
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult SalvarFuncionario(Funcionario model)
-        {
-            _app.SalvaFuncionario(model);
+            Funcionario funcionario = Mapper.Map<FuncionarioViewModel, Funcionario>(model);
+            
+            _app.SalvaFuncionario(funcionario);
             MensagemParaUsuario.MensagemSucesso("Dados atualizados com sucesso.", TempData);
             var parametros = new {id= model.Id, modo = "read"};
             return RedirectToAction("FichaCadastral", parametros);

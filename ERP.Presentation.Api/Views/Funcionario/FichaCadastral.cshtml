@@ -1,5 +1,5 @@
 ﻿<!-- Instancia do modelo no qual terá os dados -->
-@model RH.Domain.Entities.Funcionario
+@model RH.ViewModel.FuncionarioViewModel
 
 @{
     ViewBag.Title = ViewBag.TituloDaPagina;
@@ -9,21 +9,21 @@
     <fieldset id="Campos_Form">
         @{Html.RenderPartial("_Resumo");}
         <legend><h3 class="azul"><strong></strong></h3></legend>
-        @{
-            var visivel = "none";
 
-            if (ViewBag.Modo == "edit")
-            {
-                visivel = "inline";
-            }
+        @{
+        var visivel = "none";
+
+        if (ViewBag.Modo == "edit")
+        {
+            visivel = "inline";
+        }
 
         }
-        
+
         <div class="row botoes" style="padding: 6px; border: blueviolet; border: thin; display:@visivel">
             <button class="btn btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar Alterações</button>
             <button onclick="HabilitarModoEdicao(false)" class="btn btn-danger"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Cancelar</button>
         </div>
-
         <div id="Linha_Botoes_Tab" class="row">
             <div class="col-xs-12">
                 <strong>
@@ -38,11 +38,11 @@
             </div>
         </div>
         <div id="Linha_Conteudo" class="row">
-            <div id="Colunas_Conteudo" class="col-md-10">
+            <div id="Colunas_Conteudo" class="col-md-12">
                 <!--
                 Classe 'tab-content' marca a Div devidamente construida como o conteudo das guias que estarao vinculadas com a 'nav' acima
                 Classe 'tab-pane' marcada em cada Div, indica que a div representa a tab especificada pelo ID e vinculada com o link acima--
-                -->
+            -->
                 <div id="conteudoTab" class="tab-content cor_azul">
                     @{Html.RenderPartial("_TabInfo");}
                     @{Html.RenderPartial("_TabDoc");}
@@ -72,12 +72,14 @@
         }
         return false;
     }
-    
+
 </script>
 
 @if (@editar == false && ViewBag.Modo == "read")
 {
     <script>
+        HabilitarModoEdicao(false);
+
         $('.btnCancelar').show();
         $('.btnEditar').hide();
     </script>
