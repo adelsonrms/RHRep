@@ -9,17 +9,15 @@
     <fieldset id="Campos_Form">
         @{Html.RenderPartial("_Resumo");}
         <legend><h3 class="azul"><strong></strong></h3></legend>
-
         @{
-        var visivel = "none";
+            var visivel = "none";
 
-        if (ViewBag.Modo == "edit")
-        {
-            visivel = "inline";
+            if (ViewBag.Modo == "edit")
+            {
+                visivel = "inline";
+            }
+
         }
-
-        }
-
         <div class="row botoes" style="padding: 6px; border: blueviolet; border: thin; display:@visivel">
             <button class="btn btn-submit botaoSubmit"><i class="fa fa-save"></i>&nbsp;Salvar Alterações</button>
             <button onclick="HabilitarModoEdicao(false)" class="btn btn-danger"><span class="glyphicon glyphicon-folder-close"></span>&nbsp;Cancelar</button>
@@ -42,7 +40,7 @@
                 <!--
                 Classe 'tab-content' marca a Div devidamente construida como o conteudo das guias que estarao vinculadas com a 'nav' acima
                 Classe 'tab-pane' marcada em cada Div, indica que a div representa a tab especificada pelo ID e vinculada com o link acima--
-            -->
+                -->
                 <div id="conteudoTab" class="tab-content cor_azul">
                     @{Html.RenderPartial("_TabInfo");}
                     @{Html.RenderPartial("_TabDoc");}
@@ -55,6 +53,19 @@
     </fieldset>
 </div>
 
+<!-- Mascaras -->
+<script src="~/Content/jquery/jquery.mask.min.js"></script>
+
+<script type="text/javascript">
+
+    $('.datas').mask("00/00/0000", { placeholder: "__/__/____" });
+    $('.cpf').mask('000.000.000-00', { reverse: true });
+    $('.telefone_fixo').mask('(00) 0000-0000', { placeholder: "(__) ____-____" });
+    $('.telefone_celular').mask('(00) 90000-0000', { placeholder: "(__) 9____-____" });
+    $('.dinheiro').mask("#.##0,00", { reverse: true });
+    $('.cep').mask('00000-000', { reverse: true, placeholder: "_____-___" });
+</script>
+
 <script>
     function HabilitarModoEdicao(sim) {
         if (sim === true) {
@@ -62,7 +73,7 @@
             $('.botoes').show();
             $('.btnCancelar').show();
             $('.btnEditar').hide();
-            
+
 
         } else {
             $('.form-control').attr('disabled', 'disabled');
@@ -74,7 +85,6 @@
     }
 
 </script>
-
 @if (@editar == false && ViewBag.Modo == "read")
 {
     <script>
@@ -90,5 +100,3 @@
     $("h5").addClass("laranja");
     document.getElementById("qtdItems").innerText = document.getElementById('tblEventos').rows.length - 1;
 </script>
-
-

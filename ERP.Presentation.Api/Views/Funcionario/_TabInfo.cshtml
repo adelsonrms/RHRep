@@ -70,7 +70,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     @Html.LabelFor(funcionario => funcionario.DataNascimento, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.DataNascimento, new { @class = "form-control" })
+                                    @Html.TextBoxFor(funcionario => funcionario.DataNascimento, new { @class = "form-control datas" })
                                 </div>
                                 @Html.ValidationMessageFor(m => m.DataNascimento, "", new { @class = "text-danger" })
                             </div>
@@ -124,14 +124,14 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     @Html.LabelFor(funcionario => funcionario.Telefone, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.Telefone, new { @class = "form-control", @placeholder = "Telefone fixo" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Telefone, new { @class = "form-control telefone_fixo"})
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     @Html.LabelFor(funcionario => funcionario.Celular,new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.Celular, new { @class = "form-control", @placeholder = "Telefone celular" })
+                                    @Html.TextBoxFor(funcionario => funcionario.Celular, new { @class = "form-control telefone_celular"})
                                 </div>
                                 @Html.ValidationMessageFor(m => m.Celular, "", new { @class = "text-danger" })
                             </div>
@@ -165,33 +165,37 @@
                         </div>
 
                         <div class="row" id="Endereco_CEP">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    @Html.LabelFor(funcionario => funcionario.CEP, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.CEP, new { @class = "form-control", @placeholder = "Informe o CEP" })
+                            <div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        @Html.LabelFor(funcionario => funcionario.CEP, new { @class = "control-label" })
+                                        @Html.TextBoxFor(funcionario => funcionario.CEP, new { @class = "form-control cep", @placeholder = "Informe o CEP", id = "txtInfoCEP", style = "width: 100px;" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
                                 </div>
-                                @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    @Html.LabelFor(funcionario => funcionario.Bairro, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.Bairro, new { @class = "form-control", @placeholder = "Informe o nome do Bairro" })
+
+                                <div class="col-md-4">
+                                    <div class="form-group" style="padding-left: 0px;">
+                                        @Html.LabelFor(funcionario => funcionario.Bairro, new { @class = "control-label" })
+                                        @Html.TextBoxFor(funcionario => funcionario.Bairro, new { @class = "form-control", @placeholder = "Informe o nome do Bairro" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Bairro, "", new { @class = "text-danger" })
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Bairro, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-5">
-                                <div class="form-group">
-                                    @Html.LabelFor(funcionario => funcionario.Cidade, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.Cidade, new { @class = "form-control", @placeholder = "Informe a Cidade" })
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        @Html.LabelFor(funcionario => funcionario.Cidade, new { @class = "control-label" })
+                                        @Html.TextBoxFor(funcionario => funcionario.Cidade, new { @class = "form-control", @placeholder = "Informe a Cidade"})
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" })
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" })
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    @Html.LabelFor(funcionario => funcionario.Estado, new { @class = "control-label" })
-                                    @Html.TextBoxFor(funcionario => funcionario.Estado, new { @class = "form-control", @placeholder = "Informe o Estado" })
+                                <div class="col-md-1">
+                                    <div class="form-group">
+                                        @Html.LabelFor(funcionario => funcionario.Estado, new { @class = "control-label" })
+                                        @Html.TextBoxFor(funcionario => funcionario.Estado, new { @class = "form-control", @placeholder = "UF", style = "width: 50px;" })
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
                                 </div>
-                                @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

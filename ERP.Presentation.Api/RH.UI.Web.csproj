@@ -248,6 +248,7 @@
     <Content Include="Content\Images\funcionarios\welder%40tecnun.com.br.jpg" />
     <Content Include="Content\jquery\jquery-1.12.4.js" />
     <Content Include="Content\jquery\jquery.dataTables.js" />
+    <Content Include="Content\jquery\jquery.mask.min.js" />
     <Content Include="Content\jquery\jquery.maskedinput.js" />
     <Content Include="Content\select2\select2-bootstrap.css" />
     <Content Include="Content\select2\select2-bootstrap.min.css" />
